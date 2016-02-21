@@ -1,18 +1,29 @@
-package test;
+package com.example.arc.androidhomweorkonetaskone;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 
 public class Report {
 	
-	String text;
-	User addedBy;
-	LocalDate localDate;
+	private String text;
+	private User addedBy;
+	private Calendar localDate;
 	
-	public Report(String text,User user,LocalDate localDate) {
+	public Report(String text,User user) {
 		this.text = text;
 		addedBy = user;
-		this.localDate = localDate;
+		this.localDate = Calendar.getInstance();
 		
 	}
 
+	public String getText() {
+		return text;
+	}
+
+	public User getAddedBy() {
+		return addedBy;
+	}
+
+	public Calendar getLocalDate() {
+		return localDate;
+	}
 }

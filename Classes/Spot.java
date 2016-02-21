@@ -1,7 +1,6 @@
-package test;
-
-import java.time.LocalDate;
+package com.example.arc.androidhomweorkonetaskone;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public  class Spot {
 	
@@ -14,7 +13,9 @@ public  class Spot {
 	private int numRates;
 	private Comment comment;
 	private SpotType typeOfSpot;
-	LocalDate dateOfCreation;
+
+
+	Calendar dateOfCreation;
 	//private ArrayList<SpotSubType> spotSubType;
 	private ArrayList<Report> reports;
 	
@@ -28,7 +29,7 @@ public  class Spot {
 		this.comment = comment;
 		this.typeOfSpot = typeOfSpot;
 		reports = new ArrayList<Report>();
-		dateOfCreation = LocalDate.now();
+		dateOfCreation = Calendar.getInstance();
 	}
 
 	//constructor only with Name and Type
@@ -39,7 +40,7 @@ public  class Spot {
 		numRates = 0;
 		this.typeOfSpot = typeOfSpot;
 		reports = new ArrayList<Report>();
-		dateOfCreation = LocalDate.now();
+		dateOfCreation = Calendar.getInstance();
 	}
 
 
@@ -67,6 +68,26 @@ public  class Spot {
 	}
 
 	public void addReport(String report,User user) {
-		reports.add(new Report(report,user,LocalDate.now()));
+		reports.add(new Report(report,user));
+	}
+
+	public double getRate() {
+		return rate;
+	}
+
+	public int getNumRates() {
+		return numRates;
+	}
+
+	public Comment getComment() {
+		return comment;
+	}
+
+	public SpotType getTypeOfSpot() {
+		return typeOfSpot;
+	}
+
+	public Calendar getDateOfCreation() {
+		return dateOfCreation;
 	}
 }

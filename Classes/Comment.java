@@ -1,21 +1,35 @@
-package test;
+package com.example.arc.androidhomweorkonetaskone;
 
-import java.time.LocalDate;
+import java.util.Calendar;
 
 public class Comment {
 	
-	String title;
-	String description;
-	LocalDate dateOfCreation;
-	User addedBy;
+	private String title;
+	private String description;
+	private Calendar dateOfCreation;
+	private User addedBy; //+ neobhodimo li e sled kato go imame v bazi danni?
+
 	public Comment(String title, String description,User addedBy) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.dateOfCreation = LocalDate.now();
+		this.dateOfCreation = Calendar.getInstance();
 		this.addedBy = addedBy;
 	}
-	
-	
-	
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public Calendar getDateOfCreation() {
+		return dateOfCreation;
+	}
+
+	public User getAddedBy() {
+		return addedBy;
+	}
 }

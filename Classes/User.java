@@ -1,6 +1,5 @@
-package test;
-
-import java.time.LocalDate;
+package com.example.arc.androidhomweorkonetaskone;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -30,6 +29,26 @@ public class User{
 		spotsAddedByUser = new HashSet<Spot>();
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
 	public void addSpotToFavourites(Spot spot) {
 			favouriteSpots.add(spot);
 	}
@@ -55,7 +74,7 @@ public class User{
 		Spot.SpotType spotType = null;
 		//input spotType;
 		Spot coordSpot = new Spot(sc.nextLine(),spotType);
-		LocalDate date = LocalDate.now();
+		Calendar date = Calendar.getInstance();
 		coordSpot.addInfo(sc.nextLine(),sc.nextLine(),this);
 		spotsAddedByUser.add(coordSpot);
 	}
