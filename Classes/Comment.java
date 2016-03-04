@@ -1,9 +1,10 @@
-package com.example.arc.androidhomweorkonetaskone;
+package com.example.chav.mapsproject;
 
 import java.util.Calendar;
 
 public class Comment {
-	
+
+	private int id;
 	private String title;
 	private String description;
 	private Calendar dateOfCreation;

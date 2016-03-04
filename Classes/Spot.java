@@ -1,4 +1,4 @@
-package com.example.arc.androidhomweorkonetaskone;
+package com.example.chav.mapsproject;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -8,6 +8,7 @@ public  class Spot {
 							ANIMAL_CLINIC, FAST_FOOD,/*SUBTYPES FOR PIZZA KEBAP BURGERS , HOW TO IMPLENET
 							WITH SMALL ICONS*/ RESTAURANT, CASINO, GYM, FREE_WI_FI }
 	//public enum SpotSubType { PIZZA, KEBAP, BURGER, ATM, COFFEE,}
+	private int id;
 	private String name; 
 	private double rate;
 	private int numRates;

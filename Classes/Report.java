@@ -1,9 +1,10 @@
-package com.example.arc.androidhomweorkonetaskone;
+package com.example.chav.mapsproject;
 
 import java.util.Calendar;
 
 public class Report {
-	
+
+	private int id;
 	private String text;
 	private User addedBy;
 	private Calendar localDate;

@@ -1,11 +1,12 @@
-package com.example.arc.androidhomweorkonetaskone;
+package com.example.chav.mapsproject;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Scanner;
 
 
 public class User{
-	
+
+	private long id;
 	private String username;
 	private String firstName;
 	private String lastName;
@@ -15,10 +16,21 @@ public class User{
 	private HashSet<Spot> favouriteSpots;
 	private HashSet<Spot> spotsAddedByUser;
 	Scanner sc = new Scanner(System.in);
-	
+
 	
 	public User(String username, String firstName, String lastName, String email, String password) {
-		super();
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		friends = new HashSet<User>();
+		favouriteSpots = new HashSet<Spot>();
+		spotsAddedByUser = new HashSet<Spot>();
+	}
+
+	public User(long id, String username, String firstName, String lastName, String email, String password) {
+		this.id = id;
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -49,9 +61,64 @@ public class User{
 		return password;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public HashSet<Spot> getSpotsAddedByUser() {
+		return spotsAddedByUser;
+	}
+
+	public void setSpotsAddedByUser(HashSet<Spot> spotsAddedByUser) {
+		this.spotsAddedByUser = spotsAddedByUser;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public HashSet<User> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(HashSet<User> friends) {
+		this.friends = friends;
+	}
+
+	public HashSet<Spot> getFavouriteSpots() {
+		return favouriteSpots;
+	}
+
+	public void setFavouriteSpots(HashSet<Spot> favouriteSpots) {
+		this.favouriteSpots = favouriteSpots;
+	}
+
 	public void addSpotToFavourites(Spot spot) {
 			favouriteSpots.add(spot);
 	}
+
+
+
 	
 	public void addReport(String report, Spot spot) {
 		spot.addReport(report,this);
