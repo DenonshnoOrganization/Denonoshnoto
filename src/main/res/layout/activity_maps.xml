@@ -1,0 +1,62 @@
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/maps_main_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <fragment android:id="@+id/map"
+              android:name="com.google.android.gms.maps.SupportMapFragment"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:map="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context=".controller.MapsActivity"/>
+
+    <ImageButton
+        android:id="@+id/add_spot_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/main_button_mid"
+        android:text="24"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
+
+    <ImageButton
+        android:id="@+id/add_friend_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add_user"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:layout_above="@id/add_spot_button"
+        android:layout_alignParentRight="true"/>
+
+    <ImageButton
+        android:id="@+id/show_location_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show location"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
+        android:src="@drawable/locate_small"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/filter_spot_recycler_view"
+        android:layout_width="wrap_content"
+        android:background="@color/white"
+        android:layout_height="match_parent"
+        android:layout_gravity = "left"
+        android:layout_margin="5dp"
+        >
+    </android.support.v7.widget.RecyclerView>
+
+
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item  android:drawable="@drawable/animal_clinic_shadow" android:state_pressed="true"/>
+    <item android:state_selected="true" android:drawable="@drawable/animal_clinic_shadow" />
+    <item android:drawable="@drawable/animal_clinic" />
+    <item android:state_focused="true" android:drawable="@drawable/animal_clinic_shadow"/>
+
+
+</selector>
