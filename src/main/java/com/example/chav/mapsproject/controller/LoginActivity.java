@@ -1,28 +1,17 @@
 package com.example.chav.mapsproject.controller;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.security.keystore.UserNotAuthenticatedException;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.chav.mapsproject.Message;
 import com.example.chav.mapsproject.R;
-import com.example.chav.mapsproject.User;
 import com.example.chav.mapsproject.UserManager;
-import com.example.chav.mapsproject.model_dao.UserDAO;
-
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private static String PREF_USER_NAME = "username";
 
     private UserManager mUserManager;
     private  EditText userNameText;

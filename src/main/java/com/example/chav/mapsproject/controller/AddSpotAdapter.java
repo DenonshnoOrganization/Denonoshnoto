@@ -58,7 +58,7 @@ public class AddSpotAdapter extends RecyclerView.Adapter<AddSpotAdapter.SpotView
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Log.d("asd", "onClick " + current.getText());
-                                adapterCallback.onMethodCallback(current.getText(), current.getImg());
+                                adapterCallback.onSpotChosenCallback(current.getText(), current.getImg());
                                 dialog.cancel();
                             }
                         })
@@ -79,6 +79,7 @@ public class AddSpotAdapter extends RecyclerView.Adapter<AddSpotAdapter.SpotView
 
     public static class SpotViewHolder extends RecyclerView.ViewHolder {
 
+
         TextView text;
         ImageButton imageView;
 
@@ -88,7 +89,8 @@ public class AddSpotAdapter extends RecyclerView.Adapter<AddSpotAdapter.SpotView
             imageView = (ImageButton) itemView.findViewById(R.id.icon_image_button);
         }
     }
+
     public interface AdapterCallback{
-        void onMethodCallback(String iconText, int image);
+        void onSpotChosenCallback(String iconText, int image);
     }
 }

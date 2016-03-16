@@ -73,7 +73,7 @@ public class AddSpotFragment extends DialogFragment implements AddSpotAdapter.Ad
     }
 
     @Override
-    public void onMethodCallback(String iconText, int image) {
+    public void onSpotChosenCallback(String iconText, int image) {
         Log.d("asd", "respond to " + iconText);
         onSpotSelectedListener.onSpotSelected(iconText, image);
         getDialog().hide();

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface IUserDAO {
 
-    void addUser(User user);
+    User addUser(User user);
 
     User getUser(int id);
 
@@ -18,5 +18,4 @@ public interface IUserDAO {
     void deleteUser();
 
 
-    long getID(User user);
 }

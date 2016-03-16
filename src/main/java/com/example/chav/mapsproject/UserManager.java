@@ -5,10 +5,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
+import android.util.Log;
 
 import com.example.chav.mapsproject.model_dao.UserDAO;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import java.util.List;
 
@@ -16,10 +15,6 @@ import java.util.List;
  * Created by Chav on 3/4/2016.
  */
 public class UserManager {
-
-    public static int FRIEND_FOUND = 1;
-    public static int FRIEND_ALREADY = 0;
-    public static int FRIEND_NOT_FOUND = -1;
 
     static UserManager instance;
 
@@ -62,9 +57,10 @@ public class UserManager {
     }
 
     public void registerUser(User user) {
-        mUserDAO.addUser(user);
-        user.setId(mUserDAO.getID(user));
-        this.mCurrentUser = user;
+        this.mCurrentUser = mUserDAO.addUser(user);
+        mAllUsers.add(user);
+        Log.d("user", "" + user.getId());
+        Log.d("user", "" + user.getUsername());
         mIsSignedIn = true;
     }
 
@@ -90,28 +86,33 @@ public class UserManager {
         return instance;
     }
 
-    public int findFriend(String username, Context context) {
+    public void findFriend(String username, Context context) {
+        if (username.equals(mCurrentUser.getUsername())) {
+            Message.message(context, "Adding yourself as a friend is forbidden in this app`s world.");
+            return;
+        }
         for (User user : mAllUsers) {
             if (user.getUsername().equals(username)) {
                 if (mCurrentUser.getFriends().contains(user.getId())) {
+                    Message.message(context, "You are already friends with " + username + ".");
+                    return;
+                } else {
                     int notificationId = 1;
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-                            .setSmallIcon(R.drawable.add_user)
-                            .setLargeIcon(BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.add_user))
+                            .setSmallIcon(R.drawable.main_button_small)
+                            .setLargeIcon(BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.main_button_mid))
                             .setContentTitle("Add Friend")
-                            .setContentText("Your friend request to " + username + " has been set successfully.");
+                            .setContentText("Your friend request to " + username + " has been sent.");
 
                     NotificationManager mNotifyMgr =
                             (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
                     mNotifyMgr.notify(notificationId, builder.build());
-
-                    return FRIEND_ALREADY;
+                    return;
                 }
-                return FRIEND_FOUND;
+
             }
         }
-
-        return FRIEND_NOT_FOUND;
+        Message.message(context, username + " does not exist.");
     }
 
 }

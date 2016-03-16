@@ -98,7 +98,7 @@ public class SpotDAO implements ISpotDAO {
             } while (cursor.moveToNext());
         }
         database.close();
-        Message.message(mContext, "returned allSpots information");
+//        Message.message(mContext, "returned allSpots information");
         return allSpots;
     }
 

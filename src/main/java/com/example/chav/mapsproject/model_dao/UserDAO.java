@@ -27,7 +27,7 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.KEY_USER_USERNAME, user.getUsername());
         values.put(DatabaseHelper.KEY_USER_FIRST_NAME, user.getFirstName());
@@ -39,15 +39,20 @@ public class UserDAO implements IUserDAO {
         database = dbHelper.getWritableDatabase();
 
         database.insert(DatabaseHelper.TABLE_USERS, null, values);
-
+        long lastId = 0;
         String selectQuery = " SELECT " + DatabaseHelper.KEY_ID + " FROM " + DatabaseHelper.TABLE_USERS + " ORDER BY " + DatabaseHelper.KEY_ID + " DESC LIMIT 1";
         Cursor c = database.rawQuery(selectQuery, null);
         if (c != null && c.moveToFirst()) {
-            long lastId = c.getLong(0);
+            lastId = c.getLong(0);
             user.setId(lastId);
             Log.d("asd", " user added id " + lastId);
         }
         database.close();
+
+//        Log.d("user", "returning " + user.getId());
+//        Log.d("user", "returning " + user.getUsername());
+
+        return user;
 
     }
 
@@ -77,18 +82,15 @@ public class UserDAO implements IUserDAO {
             } while (cursor.moveToNext());
         }
         database.close();
-        Message.message(mContext, "returned the database information");
+//        Message.message(mContext, "returned the database information");
         return allUsers;
     }
+
+
 
     @Override
     public void deleteUser() {
 
-    }
-
-    @Override
-    public long getID(User user) {
-        return 0;
     }
 
     public static UserDAO getInstance(Context context) {

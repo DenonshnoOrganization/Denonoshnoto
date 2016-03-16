@@ -1,47 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:layout_marginLeft="10dp"
-android:layout_marginRight="10dp"
-android:orientation="vertical"
-android:gravity="center"
-tools:context=".controller.LoginActivity">
-
-<EditText
-    android:id="@+id/username_edit_text"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textAlignment="textEnd"
-    android:inputType="textEmailAddress"
-    android:hint="Your username"/>
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".controller.LoginActivity">
 
-<EditText
-    android:id="@+id/password_edit_text"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textAlignment="textEnd"
-    android:inputType="textPassword"
-    android:hint="Your password"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/main_button"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/denonoshnoto"/>
+    <EditText
+        android:id="@+id/username_edit_text"
+        android:textColor="#142b54"
+        android:textColorHint="#b5d3ff"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="username"
+        android:inputType="textEmailAddress"
+        android:textAlignment="textEnd" />
 
-<Button
-    android:id="@+id/sign_in_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/sign_in"/>
+    <EditText
+        android:id="@+id/password_edit_text"
+        android:textColorHint="#b5d3ff"
+        android:textColor="#142b54"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:textAlignment="textEnd" />
 
-<Button
-    android:id="@+id/sign_up_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/sign_up"/>
+    <Button
+        android:id="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:textColor="#142b54"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/sign_in" />
 
-<Button
-    android:id="@+id/skip_button"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="@string/skip"/>
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_shape"
+        android:textColor="#142b54"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/sign_up" />
+
+    <Button
+        android:id="@+id/skip_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/skip"
+        android:visibility="gone" />
 
 </LinearLayout>

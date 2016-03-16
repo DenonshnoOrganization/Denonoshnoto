@@ -23,9 +23,9 @@ public class User{
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		friends = new HashSet<>();
-		favouriteSpots = new HashSet<Spot>();
-		spotsAddedByUser = new HashSet<Spot>();
+		this.friends = new HashSet<>();
+		this.favouriteSpots = new HashSet<Spot>();
+		this.spotsAddedByUser = new HashSet<Spot>();
 	}
 
 	public User(long id, String username, String firstName, String lastName, String email, String password) {
@@ -35,9 +35,9 @@ public class User{
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		friends = new HashSet<>();
-		favouriteSpots = new HashSet<>();
-		spotsAddedByUser = new HashSet<>();
+		this.friends = new HashSet<>();
+		this.favouriteSpots = new HashSet<>();
+		this.spotsAddedByUser = new HashSet<>();
 	}
 
 	public String getUsername() {

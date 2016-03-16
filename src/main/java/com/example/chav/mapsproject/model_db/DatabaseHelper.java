@@ -9,7 +9,7 @@ import com.example.chav.mapsproject.Message;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Database name and version
-    private static final int DATABASE_VERSION = 13;
+    private static final int DATABASE_VERSION = 17;
     private static final String DATABASE_NAME = "denonoshnotoDatabase";
 
     //Tables names
@@ -63,7 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_USERS = "CREATE TABLE " + TABLE_USERS
             + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," + KEY_USER_USERNAME + " VARCHAR(15) NOT NULL UNIQUE," +
             KEY_USER_FIRST_NAME + " VARCHAR(100)," + KEY_USER_LAST_NAME + " VARCHAR(100),"
-            + KEY_USER_EMAIL + " TEXT UNIQUE," + KEY_USER_PASSWORD + " TEXT UNIQUE" + ")";
+            + KEY_USER_EMAIL + " TEXT UNIQUE," + KEY_USER_PASSWORD + " TEXT" + ")";
 
     private static final String CREATE_TABLE_SPOTS = "CREATE TABLE " + TABLE_SPOTS
             + "(" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_SPOT_NAME + " VARCHAR(15),"
@@ -98,7 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
-        Message.message(context, "Constructor called");
+//        Message.message(context, "Constructor called");
 
     }
 
@@ -117,7 +117,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_REPORTS);
         db.execSQL(CREATE_TABLE_FRIENDS);
         db.execSQL(CREATE_TABLE_FAVORITE_SPOTS);
-        Message.message(context, "On create called");
+//        Message.message(context, "On create called");
     }
 
     @Override
@@ -128,7 +128,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_REPORTS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FRIENDS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITE_SPOTS);
-        Message.message(context, "On update called");
+//        Message.message(context, "On update called");
 
         onCreate(db);
     }

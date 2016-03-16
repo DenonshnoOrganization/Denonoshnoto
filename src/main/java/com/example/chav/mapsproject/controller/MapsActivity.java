@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -13,18 +14,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.DragEvent;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import com.example.chav.mapsproject.FilterSpotItem;
 import com.example.chav.mapsproject.Message;
@@ -85,6 +83,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         setContentView(R.layout.activity_maps);
+        new GetContacts().execute();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -98,16 +97,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mAddFriendButton = (ImageButton) findViewById(R.id.add_friend_button);
         mAddFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 SavedSharedPreference.clearUserName(v.getContext());
-                AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
-                EditText input = new EditText(v.getContext());
+                final EditText input = new EditText(v.getContext());
                 input.setHint("please type username here");
-                alertDialog.setTitle("title");
-                alertDialog.setMessage(message);
-                alertDialog.setView(input);
-
-
+//                AlertDialog alertDialog = new AlertDialog.Builder(v.getContext()).create();
+                AlertDialog alertDialog = new AlertDialog.Builder(v.getContext())
+                        .setTitle("Add Friend")
+                        .setView(input)
+                        .setPositiveButton("Add", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                UserManager.getInstance(v.getContext()).findFriend(input.getText().toString(), v.getContext());
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        }).show();
             }
         });
 
@@ -226,51 +235,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-//    private void setMarkers() {
-//
-//        Handler handler = new Handler(Looper.getMainLooper());
-//
-//        LatLngBounds bounds = mMap.getProjection().getVisibleRegion().latLngBounds;
-//        double latitudeEast = bounds.northeast.latitude;
-//        double longitudeEast = bounds.northeast.longitude;
-//        double latitudeWest = bounds.southwest.latitude;
-//        double longitudeWest = bounds.southwest.longitude;
-//
-//        //TODO add int icon to Spot and to ze database table
-//        for (Spot spot : SpotManager.getInstance(this).getAllSpots()) {
-//            LatLng latLng = new LatLng(spot.getLatitude(), spot.getLongitude());
-//
-//            Log.d("pos", "" + spot.getName() + (spot.getLongitude() > longitudeWest
-//                    && spot.getLongitude() < longitudeEast
-//                    && spot.getLatitude() > latitudeWest
-//                    && spot.getLatitude() < latitudeEast));
-//
-//
-//            if (spot.getLongitude() > longitudeWest //TODO SEE FAVORITES TO MAKE OPTIMIZATION HERE
-//                    && spot.getLongitude() < longitudeEast
-//                    && spot.getLatitude() > latitudeWest
-//                    && spot.getLatitude() < latitudeEast) {
-//            if (bounds.contains(new LatLng(spot.getLatitude(), spot.getLongitude()))) {
-//
-//                if (!mVisibleMarkers.containsKey(spot.getId())) {
-//                    MarkerOptions options = new MarkerOptions()
-//                            .position(latLng)
-//                            .title(spot.getName())
-//                            .icon(BitmapDescriptorFactory.fromResource(spot.getImg()));
-//                    mVisibleMarkers.put(spot.getId(), mMap.addMarker(options));
-//                }
-//            } else if (mVisibleMarkers.containsKey(spot.getId())) {
-//                mVisibleMarkers.get(spot.getId()).remove();
-//                mVisibleMarkers.remove(spot.getId());
-//            }
-//        }
-//    }
 
     private void activateLocationTracking() {
         mListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                Message.message(MapsActivity.this, "Location Changed " + location.getLatitude() + " " + location.getLongitude());
+//                Message.message(MapsActivity.this, "Location Changed " + location.getLatitude() + " " + location.getLongitude());
                 goToLocation(location.getLatitude(), location.getLongitude(), 15);
             }
         };
@@ -318,7 +288,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         getLastLocation();
-        Message.message(this, "Connected!");
+//        Message.message(this, "Connected!");
 
     }
 
@@ -334,7 +304,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     protected void onStart() {
         mLocationClient.connect();
-        Log.d("st", "started");
+//        Log.d("st", "started");
         super.onStart();
     }
 
@@ -363,7 +333,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(mLocationClient);
         LatLng latlng;
         if (currentLocation == null) {
-            Message.message(this, "Couldn't connect");
+//            Message.message(this, "Couldn't connect");
             latlng = new LatLng(42.7, 23.3);
             CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latlng, 15);
 
@@ -408,13 +378,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 currentLocation.getLatitude(),
                 currentLocation.getLongitude());
         addMarker( SpotManager.getInstance(this).addSpot(type, latlng, UserManager.getInstance(this).getUser(), image));
+        setMarkers();
         stopLocationUpdates();
 
     }
 
     @Override
     public void onSpotSelected(String spotType, int image) {
-        Log.d("asd", " gona crete " + spotType + " for ya");
+//        Log.d("asd", " gona crete " + spotType + " for ya");
         createNewSpot(spotType, image);
     }
 
@@ -456,5 +427,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mRemoveFromFilter.add(imageId);
         }
     }
+
+    private class GetContacts extends AsyncTask<Void, Void, Void> {
+        ProgressBar pb = (ProgressBar) findViewById(R.id.progress_bar);
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pb.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+//            Log.d("thread", "executing");
+            UserManager.getInstance(getApplicationContext());
+            SpotManager.getInstance(getApplicationContext());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            pb.setVisibility(View.GONE);
+
+        }
+
+    }
+
 
 }
